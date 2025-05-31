@@ -27,7 +27,7 @@ export default function BookingWidget({place}){
         numberOfDays = Math.ceil((new Date(checkOut) - new Date(checkIn)) / (1000 * 60 * 60 * 24));
 
     }
-  async function bookThisPlace() {
+  const bookThisPlace=async() => {
   try {
     const data = {
       checkIn,
@@ -38,7 +38,9 @@ export default function BookingWidget({place}){
       place: place._id,
       price: numberOfDays * place.price,
     };
+    
     const response = await axios.post('/booking', data);
+   
     const bookingId = response.data._id;
     setRedirect(`/account/bookings/${bookingId}`);
   } catch (err) {
