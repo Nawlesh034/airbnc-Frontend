@@ -41,7 +41,7 @@ export default function BookingWidget({place}){
         return <Navigate to={redirect}/>
     }
     return(
-        <div>
+        <div className="font-poppins">
 
         <div className=" text-center  text-2xl">Price:{place.price} / per night</div> 
                  

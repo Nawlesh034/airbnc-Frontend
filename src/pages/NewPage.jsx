@@ -22,31 +22,42 @@ export default function NewPage() {
  
   return (
     <>
-      <div className=" font-mono text-4xl text-justify mt-8 bg-gray-100 w-[100%] rounded-sm px-8 py-2">
-        <h1>{place?.title}</h1>
-       <AddressLink>{place.address}</AddressLink> 
-        <PlaceGallery place={place}/>
-    
-        <div className="my-4">
-          <h2 className="font-bold">Description</h2>
-          {place.description}
-          
-          </div>
-          <div className="grid grid-cols-2">
-               <div className="text-xl">
-                 Check-In: {place.checkIn}<br/>
-                 Check-out: {place. checkOut}<br/>
-                 Max Number Of guests: {place.maxGuests}
-               </div>
-               <div>
-                <div>
-                <div className="bg-white p-2 md:py-[50px] md:px-[40px] md:mx-[181px]  rounded-2xl shadow">
-                 <BookingWidget place={place}/>
-          </div>
-          </div>
-      </div>
-      </div>
-      </div>
+     <div className="font-mono font-poppins bg-gray-100 w-full px-4 py-6 md:px-8 md:py-10 rounded-md">
+  {/* Title */}
+  <h1 className="text-3xl md:text-4xl font-bold mb-2 text-gray-800">{place?.title}</h1>
+
+  {/* Address */}
+  <div className="mb-6 text-blue-700 underline">
+    <AddressLink>{place.address}</AddressLink>
+  </div>
+
+  {/* Gallery */}
+  <div className="mb-6">
+    <PlaceGallery place={place} />
+  </div>
+
+  {/* Description */}
+  <div className="mb-6">
+    <h2 className="text-2xl font-semibold mb-1 text-gray-700">Description</h2>
+    <p className="text-gray-600 leading-relaxed">{place.description}</p>
+  </div>
+
+  {/* Info + Booking */}
+  <div className="grid md:grid-cols-2 gap-6 items-start">
+    {/* Stay Info */}
+    <div className="text-gray-700 text-base md:text-lg space-y-2">
+      <p><strong>Check-In:</strong> {place.checkIn}</p>
+      <p><strong>Check-Out:</strong> {place.checkOut}</p>
+      <p><strong>Max Guests:</strong> {place.maxGuests}</p>
+    </div>
+
+    {/* Booking Widget */}
+    <div className="bg-white p-4 md:p-8 rounded-2xl shadow-md w-full max-w-md mx-auto md:mx-0">
+      <BookingWidget place={place} />
+    </div>
+  </div>
+</div>
+
     </>
   )
 }

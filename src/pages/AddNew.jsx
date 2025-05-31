@@ -59,35 +59,31 @@ export default function AddNew() {
             </>
         )
     }
-    async function addPhotoByLink(ev) {
-        ev.preventDefault();
-        const {data:filename} = await axios.post('/upload-by-link', {link: photoLink});
-        setAddedPhotos(prev => {
-          return [...prev, filename];
-        });
-        setPhotoLink('');
-      }
+   async function addPhotoByLink(ev) {
+  ev.preventDefault();
+  const { data: url } = await axios.post('/upload-by-link', { link: photoLink }); // backend returns Cloudinary URL
+  setAddedPhotos(prev => [...prev, url]);
+  setPhotoLink('');
+}
+      console.log(addPhoto);
+      console.log(photoLink)
 
-    function uploadPhoto(ev){
-        const files=ev.target.files;
-        const data =new FormData();
-        for(let i=0;i< files.length; i++){
-            data.append('photos',files[i]);
-        }
-        
-        axios.post('/upload',data,{
-            headers:{'Content-type':'multipart/form-data'}
-        
-        }).then(response =>{
-            const {data:filenames}=response;
-            setAddedPhotos(prev=>{
-                return [...prev, ...filenames];
-               });
-        }).catch(error => {
-            console.error('Error uploading photos:', error);
-        });
-    }
-     
+    function uploadPhoto(ev) {
+  const files = ev.target.files;
+  const data = new FormData();
+  for (let i = 0; i < files.length; i++) {
+    data.append('photos', files[i]);
+  }
+
+  axios.post('/upload', data, {
+    headers: { 'Content-type': 'multipart/form-data' }
+  }).then(response => {
+    const { data: urls } = response; // array of Cloudinary URLs
+    setAddedPhotos(prev => [...prev, ...urls]);
+  }).catch(error => {
+    console.error('Error uploading photos:', error);
+  });
+}
     //sending the data to the backend
 
     async function addNewPlace(ev){
@@ -153,7 +149,7 @@ export default function AddNew() {
                     <div className="mt-2  grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 ">
                         {addPhoto.length>0 && addPhoto.map(link=>
                             <div key={link} className="relative flex h-32 ">
-                                <img className="rounded-xl w-full object-cover border-4 border-slate-400" src={'http://localhost:4000/uploads/'+link}/>
+                                <img className="rounded-xl w-full object-cover border-4 border-slate-400" src={link.url}/>
                                 {/* {link} */}
                                 <button onClick={(ev)=>removePhoto(ev,link)} className="absolute bottom-2 right-2 text-white bg-black bg-opacity-60 ">
       

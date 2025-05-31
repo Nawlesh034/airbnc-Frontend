@@ -1,44 +1,90 @@
 import { useState } from "react";
 
-export default function PlaceGallery({place}) {
-    const [showAllPhoto, setShowAllPhoto] = useState(false);
-    if (showAllPhoto) { // true return the whole page
-        return <div className="absolute inset-0 bg-black text-white  min-h-screen">
-       
-          <div className="bg-black p-8 grid gap-4">
-          <h2 className="text-xl mt-4 ml-8">{place.title}</h2>
-            <div>
-            <button onClick={()=>setShowAllPhoto()} className="bg-gray-700 text-white absolute right-4 rounded-2xl p-4 font-sans"> Close Button</button>
-            </div>
-            {place?.addPhoto?.length > 0 && place.addPhoto?.map(photo => (
-              <div className=" ">
-                <img src={'http://localhost:4000/uploads/' + photo} alt="" className="h-[20vh] w-[60] " />
+export default function PlaceGallery({ place }) {
+  const [showAllPhoto, setShowAllPhoto] = useState(false);
+
+
+  return (
+ <>
+      {/* Main gallery */}
+      <div className="mt-6 px-2 md:px-16">
+        <div className="grid grid-cols-1 sm:grid-cols-[2fr_1fr] gap-3">
+          {/* Left big image */}
+          <div className="rounded-2xl overflow-hidden">
+            {place.addPhoto?.[0] && (
+              <img
+                onClick={() => setShowAllPhoto(true)}
+                src={place.addPhoto[0]}
+                alt=""
+                className="cursor-pointer w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+              />
+            )}
+          </div>
+
+          {/* Two stacked small images */}
+          <div className="grid gap-3">
+            {place.addPhoto?.[1] && (
+              <div className="rounded-2xl overflow-hidden">
+                <img
+                  onClick={() => setShowAllPhoto(true)}
+                  src={place.addPhoto[1]}
+                  alt=""
+                  className="cursor-pointer w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                />
               </div>
-            ))}</div></div>
-      }
-    return(
-        <>
-     
-        <div className="grid gap-2 grid-cols-[2fr_1fr] md:grid-cols-2 md:px-16">
-          <div className="">
-            {place.addPhoto?.[0] && (<div className="rounded-xl overflow-hidden">   <img onClick={()=>setShowAllPhoto(true)} className="cursor-pointer aspect-square object-cover" src={'http://localhost:4000/uploads/' + place.addPhoto?.[0]} alt="" /></div>)}
-
+            )}
+            {place.addPhoto?.[2] && (
+              <div className="rounded-2xl overflow-hidden">
+                <img
+                  onClick={() => setShowAllPhoto(true)}
+                  src={place.addPhoto[2]}
+                  alt=""
+                  className="cursor-pointer w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+            )}
           </div>
-          <div className="grid gap-2">
-            {place.addPhoto?.[1] && (<div className="rounded-xl overflow-hidden">  <img onClick={()=>setShowAllPhoto(true)} className="cursor-pointer aspect-square object-cover" src={'http://localhost:4000/uploads/' + place.addPhoto?.[1]} alt="" /></div>)}
-            <div className="">
-              {place.addPhoto?.[2] && (<div className="rounded-xl overflow-hidden">   <img onClick={()=>setShowAllPhoto(true)} className="cursor-pointer aspect-square object-cover" src={'http://localhost:4000/uploads/' + place.addPhoto?.[2]} alt="" /></div>)}
+        </div>
 
+        {/* Show all photos button */}
+        <div className="flex justify-end mt-6">
+          <button
+            onClick={() => setShowAllPhoto(true)}
+            className="bg-black text-white py-2 px-6 rounded-xl text-sm font-semibold hover:bg-gray-800 transition"
+          >
+            Show all photos
+          </button>
+        </div>
+      </div>
+
+      {/* Fullscreen photo modal */}
+      {showAllPhoto && (
+        <div className="fixed inset-0 bg-black bg-opacity-90 z-50 overflow-y-auto">
+          <div className="p-8 max-w-6xl mx-auto">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-semibold text-white">{place.title} – All Photos</h2>
+              <button
+                onClick={() => setShowAllPhoto(false)}
+                className="bg-white text-black py-2 px-4 rounded-lg hover:bg-gray-300 transition"
+              >
+                Close
+              </button>
             </div>
 
-
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {place.addPhoto?.map((photo, index) => (
+                <div key={index} className="rounded-xl overflow-hidden">
+                  <img
+                    src={photo}
+                    alt={`photo-${index}`}
+                    className="w-full h-[250px] object-cover hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
-
         </div>
-        <div className="flex justify-end  mt-4">
-        <button onClick={() => setShowAllPhoto(true)} className="border  rounded-md border-gray-600 bg-black text-white ">Show all button</button>
-        </div>
-      
-        </>
-    )
+      )}
+    </>
+  );
 }
