@@ -22,7 +22,7 @@ export default function NewPage() {
  
   return (
     <>
-     <div className="font-mono font-poppins bg-gray-100 w-full px-4 py-6 md:px-8 md:py-10 rounded-md">
+     <div className=" font-poppins bg-gray-100 w-full px-4 py-6 md:px-8 md:py-10 rounded-md">
   {/* Title */}
   <h1 className="text-3xl md:text-4xl font-bold mb-2 text-gray-800">{place?.title}</h1>
 
