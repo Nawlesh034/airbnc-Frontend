@@ -12,7 +12,7 @@ export default function IndexPage(){
         })
     },[])
 return(
-    <div className="mt-10 gap-8 font-poppins  grid lg:grid-cols-4 md:grid-cols-4 grid-cols-2">
+    <div className="mt-10 gap-8 font-poppins  grid lg:grid-cols-4 md:grid-cols-4 grid-cols-1">
       {places.length>0 && places.map(place=>(
         
        
