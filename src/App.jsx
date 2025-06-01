@@ -19,7 +19,7 @@ import { SinglePage } from './pages/SinglePage'
 
 
 
-axios.defaults.baseURL=['http://localhost:4000','https://airbnc-backend-5udq.onrender.com'];
+axios.defaults.baseURL='https://airbnc-backend-5udq.onrender.com'
 axios.defaults.withCredentials=true;
 
 function App() {
