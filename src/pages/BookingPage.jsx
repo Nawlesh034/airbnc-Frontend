@@ -12,8 +12,15 @@ import BookingDates from "./BookingDates";
 export default function BookingPage() {
     const [booking, setBooking] = useState([])
     useEffect(() => {
-        axios.get('/booking').then(response => {
+        axios.get('/booking', {
+            withCredentials: true
+        }).then(response => {
             setBooking(response.data);
+        }).catch(error => {
+            console.error("Error fetching bookings:", error);
+            if (error.response?.status === 401) {
+                console.log("Authentication required for bookings");
+            }
         })
     }, [])
     return (

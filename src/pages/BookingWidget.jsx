@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react"
-import { addDays } from "date-fns/addDays";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../UserContext";
@@ -29,6 +28,13 @@ export default function BookingWidget({place}){
     }
   const bookThisPlace=async() => {
   try {
+    // Check if user is logged in
+    if (!user) {
+      alert("Please log in to make a booking");
+      setRedirect('/login');
+      return;
+    }
+
     const data = {
       checkIn,
       checkOut,
@@ -38,17 +44,25 @@ export default function BookingWidget({place}){
       place: place._id,
       price: numberOfDays * place.price,
     };
-    
-    
-    const response = await axios.post('/booking', data,{
-       withCredentials: true 
+
+    console.log('Booking data:', data);
+
+    const response = await axios.post('/booking', data, {
+       withCredentials: true
     });
-   
+
+    console.log('Booking response:', response.data);
     const bookingId = response.data._id;
-    setRedirect(`/account/bookings/${bookingId}`);
+    setRedirect(`/account/booking/${bookingId}`);
   } catch (err) {
     console.error("Booking failed:", err.response?.data || err.message || err);
-    alert("Booking failed: " + (err.response?.data?.error || err.message));
+
+    if (err.response?.status === 401) {
+      alert("Please log in to make a booking");
+      setRedirect('/login');
+    } else {
+      alert("Booking failed: " + (err.response?.data?.error || err.message));
+    }
   }
 }
     if(redirect){

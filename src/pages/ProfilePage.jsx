@@ -11,9 +11,18 @@ export default function ProfilePage(){
     const{ready,user,setUser}=useContext(UserContext);
     const [redirect,setRedirect]= useState(null);
    async function logout(){
-        await axios.post('/logout');
-        setUser(null);
-        setRedirect('/')
+        try {
+            await axios.post('/logout', {}, {
+                withCredentials: true
+            });
+            setUser(null);
+            setRedirect('/');
+        } catch (error) {
+            console.error('Logout error:', error);
+            // Still redirect even if logout fails
+            setUser(null);
+            setRedirect('/');
+        }
     }
     if(redirect){
         return <Navigate to ={redirect}/>

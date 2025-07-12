@@ -9,6 +9,8 @@ export default function IndexPage(){
     useEffect(()=>{
         axios.get('/places').then(res=>{
              setPlaces(res.data);
+        }).catch(error => {
+            console.error('Error fetching places:', error);
         })
     },[])
 return(

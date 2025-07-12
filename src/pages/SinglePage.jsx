@@ -10,13 +10,18 @@ export function SinglePage() {
     const [booking, setBooking] = useState(null);
 
     useEffect(() => {
-        axios.get('/booking').then(res => {
+        axios.get('/booking', {
+            withCredentials: true
+        }).then(res => {
             const foundBooking = res.data.find(booking => booking._id === id);
             if (foundBooking) {
                 setBooking(foundBooking);
             }
         }).catch(error => {
             console.error("Error fetching booking:", error);
+            if (error.response?.status === 401) {
+                console.log("Authentication required for booking");
+            }
         });
     }, [id]);
 
