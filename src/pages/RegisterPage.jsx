@@ -19,30 +19,34 @@ export default function RegisterPage(){
     }
 }
     return(
-        <div className="mt-4 grow flex justify-around items-center  ">
-            <div className="mb-16">
-            <h1 className="text-4xl text-center mb-4">Register</h1>
-          <form className="max-w-md m-auto   border-gray-300" onSubmit={registerUser}>
+        <div className="mt-4 md:mt-8 grow flex justify-center items-center px-4">
+            <div className="w-full max-w-md mb-16">
+            <h1 className="text-3xl md:text-4xl text-center mb-6 font-bold">Register</h1>
+          <form className="space-y-4" onSubmit={registerUser}>
             <input type="text" 
             placeholder="Nawlesh"
             value={name}
-            onChange={e=>setName(e.target.value)}/>
+            onChange={e=>setName(e.target.value)}
+            className="w-full border my-2 py-3 px-4 rounded-2xl text-base"
+            />
             <input type="email" 
             placeholder="your@gmail.com" 
             value={email}
-            onChange={e=>setEmail(e.target.value)}/>
+            onChange={e=>setEmail(e.target.value)}
+            className="w-full border my-2 py-3 px-4 rounded-2xl text-base"
+            />
             <input type="password" 
             placeholder="*****"
             value={password}
-            onChange={e=>setPassword(e.target.value)} />
-            <button className="primary">Register</button>
-            <div className="text-center py-2 text-gray-500">Already a member?
-                <Link to={'/login'} className="text-black underline">   Login now</Link>
+            onChange={e=>setPassword(e.target.value)}
+            className="w-full border my-2 py-3 px-4 rounded-2xl text-base"
+            />
+            <button className="primary py-3 text-base font-medium">Register</button>
+            <div className="text-center py-4 text-gray-500 text-sm md:text-base">Already a member?
+                <Link to={'/login'} className="text-black underline ml-1">Login now</Link>
             </div>
           </form>
           </div>
-          
-
         </div>
     )
 }

@@ -1,16 +1,51 @@
 *{
-
+  box-sizing: border-box;
 }
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Improved mobile touch targets */
 input[type="text"],input[type="password"],input[type="email"],textarea,input[type="tel"]{
-  @apply w-full border my-2 py-2 px-2 rounded-2xl;
+  @apply w-full border my-2 py-3 px-4 rounded-2xl text-base;
+  min-height: 44px; /* iOS recommended touch target size */
 }
+
 button.primary{
   background-color: #F5385D;
-  @apply  rounded-full px-2 py-2 w-full text-white 
+  @apply rounded-full px-4 py-3 w-full text-white font-medium;
+  min-height: 44px; /* iOS recommended touch target size */
+  transition: all 0.2s ease;
 }
+
+button.primary:hover {
+  background-color: #e02d4f;
+  transform: translateY(-1px);
+}
+
+button.primary:active {
+  transform: translateY(0);
+}
+
 textarea{
-  height: 200px;
+  height: 120px;
+  resize: vertical;
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+  textarea {
+    height: 100px;
+  }
+  
+  /* Improve text readability on mobile */
+  body {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  
+  /* Better touch targets for mobile */
+  button, a, input, select, textarea {
+    min-height: 44px;
+  }
 }

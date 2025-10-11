@@ -40,20 +40,26 @@ export default function PlacesPage() {
           </NavLink>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2">
+        <div className="grid gap-4 md:gap-6 grid-cols-1 lg:grid-cols-2">
           {places.length > 0 &&
             places.map((place) => (
               <div
                 key={place._id}
-                className="bg-white shadow-lg rounded-xl overflow-hidden flex flex-col md:flex-row transition hover:shadow-xl cursor-pointer"
+                className="bg-white shadow-lg rounded-xl overflow-hidden flex flex-col transition hover:shadow-xl cursor-pointer"
               >
-                <div className="w-full md:w-48 h-48 bg-gray-200">
+                <div className="w-full h-48 bg-gray-200">
                   <PlaceImg place={place} />
                 </div>
-                <div className="flex flex-col items-center p-4">
-                  <h2 className="text-lg font-semibold text-gray-800 text-center">{place.title}</h2>
-                  <NavLink to={`/account/places/${place._id}`} className="text-gray-600 mt-2 line-clamp-3 hover:text-primary transition text-center">
+                <div className="flex flex-col p-4 md:p-6">
+                  <h2 className="text-lg md:text-xl font-semibold text-gray-800 mb-2">{place.title}</h2>
+                  <p className="text-gray-600 text-sm md:text-base mb-4 line-clamp-3 flex-1">
                     {place.description}
+                  </p>
+                  <NavLink 
+                    to={`/account/places/${place._id}`} 
+                    className="bg-primary hover:bg-primary/90 text-white rounded-full py-2 px-4 text-center font-medium transition-colors duration-200"
+                  >
+                    Edit Place
                   </NavLink>
                 </div>
               </div>

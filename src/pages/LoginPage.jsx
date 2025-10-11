@@ -30,26 +30,28 @@ export default function LoginPage(){
 
   
     return(
-        <div className="mt-4 grow flex justify-around items-center  ">
-            <div className="mb-16">
-            <h1 className="text-4xl text-center mb-4">Login</h1>
-          <form className="max-w-md m-auto   border-gray-300" onSubmit={handleLoginSubmit}>
+        <div className="mt-4 md:mt-8 grow flex justify-center items-center px-4">
+            <div className="w-full max-w-md mb-16">
+            <h1 className="text-3xl md:text-4xl text-center mb-6 font-bold">Login</h1>
+          <form className="space-y-4" onSubmit={handleLoginSubmit}>
             <input type="email" 
             placeholder="your@gmail.com" 
             value={email} 
-            onChange={ev=>setEmail(ev.target.value)} />
+            onChange={ev=>setEmail(ev.target.value)}
+            className="w-full border my-2 py-3 px-4 rounded-2xl text-base"
+            />
             <input type="password" 
             placeholder="*****"
              value={password} 
-             onChange={ev=>setPassword(ev.target.value)} />
-            <button className="primary">Login</button>
-            <div className="text-center py-2 text-gray-500">Don't have an account yet?
-                <Link to={'/register'} className="text-black underline">   Register now</Link>
+             onChange={ev=>setPassword(ev.target.value)}
+             className="w-full border my-2 py-3 px-4 rounded-2xl text-base"
+             />
+            <button className="primary py-3 text-base font-medium">Login</button>
+            <div className="text-center py-4 text-gray-500 text-sm md:text-base">Don't have an account yet?
+                <Link to={'/register'} className="text-black underline ml-1">Register now</Link>
             </div>
           </form>
           </div>
-          
-
         </div>
     )
 }

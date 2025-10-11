@@ -14,26 +14,21 @@ export default function IndexPage(){
         })
     },[])
 return(
-    <div className="mt-10 gap-8 font-poppins  grid lg:grid-cols-4 md:grid-cols-4 grid-cols-1">
+    <div className="mt-6 md:mt-10 gap-4 md:gap-8 font-poppins grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {places.length>0 && places.map(place=>(
-        
-       
-           <Link to={'/places/'+place._id}> 
-            <div className="cursor-pointer hover: ">
-            {place.addPhoto?.[0] && (// this places is different end point youtuber set this place
-                <img className="aspect-square object-cover rounded-2xl" src={place.addPhoto?.[0] }alt=""/>
+           <Link to={'/places/'+place._id} key={place._id}> 
+            <div className="cursor-pointer hover:scale-105 transition-transform duration-200">
+            {place.addPhoto?.[0] && (
+                <img className="aspect-square object-cover rounded-2xl w-full" src={place.addPhoto?.[0]} alt={place.title}/>
             )}
-            <h2 className="text-sm font-bold truncate leading-6">  {place.title}</h2> 
-            <h3 className="text-xs font-sans">{place.address}</h3> 
-            <p>${place.price}</p>
-          
+            <div className="mt-2 space-y-1">
+              <h2 className="text-sm md:text-base font-bold truncate leading-5 md:leading-6">  {place.title}</h2> 
+              <h3 className="text-xs md:text-sm text-gray-600 truncate">{place.address}</h3> 
+              <p className="text-sm md:text-base font-semibold">${place.price}</p>
+            </div>
             </div>
             </Link>
-          
-          
-      )
-
-      )}
+      ))}
       </div>
 )
 }

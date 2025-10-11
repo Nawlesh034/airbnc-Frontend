@@ -30,10 +30,27 @@ export default function ProfilePage(){
     return(
         <>
         <AccountPage />
-        <div className="flex justify-center">Logged in as {user?.name} {user?.email}
-       
+        <div className="px-4 md:px-8 lg:px-16 py-6 max-w-7xl mx-auto">
+          <div className="bg-white shadow-lg rounded-2xl p-6 md:p-8 max-w-2xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-bold text-center mb-6">Profile Information</h2>
+            <div className="space-y-4 text-center">
+              <div className="text-lg md:text-xl">
+                <span className="font-semibold">Name:</span> {user?.name}
+              </div>
+              <div className="text-lg md:text-xl">
+                <span className="font-semibold">Email:</span> {user?.email}
+              </div>
+            </div>
+            <div className="flex justify-center mt-8">
+              <button 
+                onClick={logout} 
+                className="bg-primary hover:bg-primary/90 text-white rounded-full py-3 px-8 text-lg font-medium transition-all duration-200 min-w-[120px]"
+              >
+                Logout
+              </button>
+            </div>
+          </div>
         </div>
-        <button onClick={logout} className="bg-primary text-white rounded-full mt-2 mx-auto  py-2 text-2xl w-1/4">Logout</button>
         </>
     )
 }
