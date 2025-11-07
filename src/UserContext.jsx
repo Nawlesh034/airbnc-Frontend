@@ -1,5 +1,4 @@
-import { createContext, useEffect } from "react";
-import { useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 
 export const UserContext = createContext({});
@@ -9,19 +8,18 @@ export function UserContextProvider({children}){
     const[ready,setReady]=useState(false);
 
     useEffect(()=>{
-        if(!user){
-         axios.get('/profile', {withCredentials:true})
+        axios.get('/profile', {withCredentials:true})
             .then(({data})=>{
                 setUser(data);
-                setReady(true);
             })
             .catch(() => {
                 console.log('No user session found');
                 setUser(null);
+            })
+            .finally(()=>{
                 setReady(true);
             });
-        }
-    },[user])
+    },[])
 
     return(
         <UserContext.Provider value={{user,setUser,ready}}>

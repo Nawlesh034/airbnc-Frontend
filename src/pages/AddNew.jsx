@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import AccountPage from "./AccountPage";
 import Perks from "../Perks";
 import axios from "axios";
-import { Link, Navigate, useParams } from "react-router-dom";
+import {  Navigate, useParams } from "react-router-dom";
 
 
 export default function AddNew() {

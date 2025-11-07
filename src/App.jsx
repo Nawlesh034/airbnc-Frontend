@@ -15,12 +15,13 @@ import BookingPage from './pages/BookingPage'
 import AddNew from './pages/AddNew'
 import NewPage from './pages/NewPage'
 import { SinglePage } from './pages/SinglePage'
+import ProtectedRoute from './components/ProtectedRoute'
 
 
 
 
 // Force local development for now
-axios.defaults.baseURL = 'https://airbnc-backend-5udq.onrender.com';
+axios.defaults.baseURL = 'http://localhost:4000';
 axios.defaults.withCredentials = true;
 
 console.log('Axios configured with baseURL:', axios.defaults.baseURL);
@@ -33,25 +34,21 @@ function App() {
     <UserContextProvider>
     <Routes>
       <Route path='/' element={<Layout/>}>
-      <Route index element={<IndexPage/>}/>
-      <Route path='/login' element={<LoginPage/>}/>
-      <Route path='/register' element={<RegisterPage/>}/>
-      <Route path='/account' element={<AccountPage/>}/>
+        <Route index element={<IndexPage/>}/>
+        <Route path='login' element={<LoginPage/>}/>
+        <Route path='register' element={<RegisterPage/>}/>
+        <Route path='places/:id' element={<NewPage/>}/>
 
-      <Route path='/account/profile' element={<ProfilePage/>}/>
-      <Route path='/account/places' element={<PlacesPage/>}/>
-   
-      <Route path='/account/bookings' element={<BookingPage/>}/>
-      <Route path='/account/bookings/:id' element={<BookingPage/>}/>
-      <Route path='/account/booking/:id' element={<SinglePage/>}/>
-
-      
-    
-      <Route path='/account/places/new' element={<AddNew/>}/>
-      <Route path='/account/places/:id' element={<AddNew/>}/>
-      <Route path='/places/:id' element={<NewPage/>}/>
-    
-      
+        <Route element={<ProtectedRoute/>}>
+          <Route path='account' element={<AccountPage/>}/>
+          <Route path='account/profile' element={<ProfilePage/>}/>
+          <Route path='account/places' element={<PlacesPage/>}/>
+          <Route path='account/places/new' element={<AddNew/>}/>
+          <Route path='account/places/:id' element={<AddNew/>}/>
+          <Route path='account/bookings' element={<BookingPage/>}/>
+          <Route path='account/bookings/:id' element={<BookingPage/>}/>
+          <Route path='account/booking/:id' element={<SinglePage/>}/>
+        </Route>
       </Route>
     </Routes>
     </UserContextProvider>

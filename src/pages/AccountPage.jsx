@@ -1,18 +1,12 @@
-import { NavLink, Navigate, useParams } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import { UserContext } from "../UserContext.jsx"
-import { useContext, useState } from "react"
-import { Link } from "react-router-dom"
+import { useContext } from "react"
 
 export default function AccountPage(){
-    const {ready,user}=useContext(UserContext)
-    const [state,setState]=useState('');
+    const {ready}=useContext(UserContext)
     if(!ready){
-        return 'Loading....'
+        return <div className="flex h-full min-h-[200px] items-center justify-center text-gray-600">Loading...</div>
     }
-    if(ready && !user){
-        return <Navigate to={'/login'}/>
-    }
-   
 
     return(
         <div>
